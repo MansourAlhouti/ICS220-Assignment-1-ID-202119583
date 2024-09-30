@@ -1,0 +1,286 @@
+import random
+from enum import Enum
+
+
+# ENUM for Room Availability
+class RoomAvailability(Enum):
+    available = "available"
+    not_available = "not available"
+
+
+# ENUM for Payment Method
+class PaymentMethod(Enum):
+    card = "card"
+    at_hotel = "at hotel"
+
+
+# This class is for User information, representing basic user details
+class User:
+    def __init__(self, firstName, lastName, email, emiratesID, phoneNumber, password, username):
+        self.__firstName = firstName
+        self.__lastName = lastName
+        self.__email = email
+        self.__emiratesID = emiratesID
+        self.__phoneNumber = phoneNumber
+        self.__password = password
+        self.__username = username
+
+    # Getter and setter methods for first name
+    def getFirstName(self):
+        return self.__firstName
+
+    def setFirstName(self, firstName):
+        self.__firstName = firstName
+
+    # Getter and setter methods for last name
+    def getLastName(self):
+        return self.__lastName
+
+    def setLastName(self, lastName):
+        self.__lastName = lastName
+
+    # Get and set methods for email
+    def getEmail(self):
+        return self.__email
+
+    def setEmail(self, email):
+        self.__email = email
+
+    # Get and set methods for Emirates ID
+    def getEmiratesID(self):
+        return self.__emiratesID
+
+    def setEmiratesID(self, emiratesID):
+        self.__emiratesID = emiratesID
+
+    # Get and set methods for phone number
+    def getPhoneNumber(self):
+        return self.__phoneNumber
+
+    def setPhoneNumber(self, phoneNumber):
+        self.__phoneNumber = phoneNumber
+
+    # Get and set methods for password
+    def getPassword(self):
+        return self.__password
+
+    def setPassword(self, password):
+        self.__password = password
+
+    # Get and set methods for username
+    def getUsername(self):
+        return self.__username
+
+    def setUsername(self, username):
+        self.__username = username
+
+    # This method is for printing the users details.
+    def print_user_details(self):
+        print("User Details:")
+        print("First Name: " + self.getFirstName())
+        print("Last Name: " + self.getLastName())
+        print("Email: " + self.getEmail())
+        print("Emirates ID: " + self.getEmiratesID())
+        print("Phone Number: " + str(self.getPhoneNumber()))
+        print("Username: " + self.getUsername())
+
+
+# The modified Room class to stop printing if the room is not available
+class Room:
+    def __init__(self, roomSize, checkInDate, checkOutDate, roomPrice, roomAvailability):
+        self.__roomNumber = self.randomizeRoomNumber()  # Random room number generator
+        self.__roomSize = roomSize
+        self.__checkInDate = checkInDate
+        self.__checkOutDate = checkOutDate
+        self.__roomPrice = roomPrice
+        self.__roomAvailability = roomAvailability
+
+    # Random function to create random room numbers
+    def randomizeRoomNumber(self):
+        return random.randint(100, 999)
+
+    # Getter and setter methods for room number
+    def getRoomNumber(self):
+        return self.__roomNumber
+
+    def setRoomNumber(self, roomNumber):
+        self.__roomNumber = roomNumber
+
+    # Getter and setter methods for room size
+    def getRoomSize(self):
+        return self.__roomSize
+
+    def setRoomSize(self, roomSize):
+        self.__roomSize = roomSize
+
+    # Get and set methods for check-in date
+    def getCheckInDate(self):
+        return self.__checkInDate
+
+    def setCheckInDate(self, checkInDate):
+        self.__checkInDate = checkInDate
+
+    # Get and set methods for check-out date
+    def getCheckOutDate(self):
+        return self.__checkOutDate
+
+    def setCheckOutDate(self, checkOutDate):
+        self.__checkOutDate = checkOutDate
+
+    # Get and set methods for room price
+    def getRoomPrice(self):
+        return self.__roomPrice
+
+    def setRoomPrice(self, roomPrice):
+        self.__roomPrice = roomPrice
+
+    # Get and set methods for room availability using ENUM
+    def getRoomAvailability(self):
+        return self.__roomAvailability
+
+    def setRoomAvailability(self, roomAvailability):
+        self.__roomAvailability = roomAvailability
+
+    # The method to print room details
+    def print_room_details(self):
+        if self.getRoomAvailability() == RoomAvailability.not_available:
+            print("Sorry, this room is not available.")
+            return  # This is for stopping the print function only if the room isn't available if it's available it will print the rest
+        print("\nRoom Details:")
+        print("Room Number: " + str(self.getRoomNumber()))
+        print("Room Size: " + self.getRoomSize())
+        print("Check-In Date: " + self.getCheckInDate())
+        print("Check-Out Date: " + self.getCheckOutDate())
+        print("Room Price: " + str(self.getRoomPrice()))
+        print("Room Availability: " + self.getRoomAvailability().value)
+
+
+# This class is responsible for payment related information
+class Payment:
+    def __init__(self, creditCardName, creditCardLastName, creditCardStartDate, creditCardExpiryDate, creditCardNumber,
+                 paymentMethod):
+        self.__creditCardName = creditCardName
+        self.__creditCardLastName = creditCardLastName
+        self.__creditCardStartDate = creditCardStartDate
+        self.__creditCardExpiryDate = creditCardExpiryDate
+        self.__creditCardNumber = creditCardNumber
+        self.__paymentMethod = paymentMethod
+
+    # Get and set methods for credit card name
+    def getCreditCardName(self):
+        return self.__creditCardName
+
+    def setCreditCardName(self, creditCardName):
+        self.__creditCardName = creditCardName
+
+    # Get and set methods for credit card last name
+    def getCreditCardLastName(self):
+        return self.__creditCardLastName
+
+    def setCreditCardLastName(self, creditCardLastName):
+        self.__creditCardLastName = creditCardLastName
+
+    # Get and set methods for credit card start date
+    def getCreditCardStartDate(self):
+        return self.__creditCardStartDate
+
+    def setCreditCardStartDate(self, creditCardStartDate):
+        self.__creditCardStartDate = creditCardStartDate
+
+    # Get and set methods for credit card expiry date
+    def getCreditCardExpiryDate(self):
+        return self.__creditCardExpiryDate
+
+    def setCreditCardExpiryDate(self, creditCardExpiryDate):
+        self.__creditCardExpiryDate = creditCardExpiryDate
+
+    # Get and set methods for credit card number
+    def getCreditCardNumber(self):
+        return self.__creditCardNumber
+
+    def setCreditCardNumber(self, creditCardNumber):
+        self.__creditCardNumber = creditCardNumber
+
+    # The method i am using to print payment details
+    def print_payment_details(self):
+        print("\nPayment Details:")  # \n is for creating a new line when printing.
+        if self.__paymentMethod == PaymentMethod.at_hotel:
+            print(
+                "Payment Method: Pay at Hotel")  # if the person is willing to pay at the hotel it doesn't print the users credit card information
+        else:
+            print("Credit Card Name: " + self.getCreditCardName())
+            print("Credit Card Last Name: " + self.getCreditCardLastName())
+            print("Credit Card Start Date: " + self.getCreditCardStartDate())
+            print("Credit Card Expiry Date: " + self.getCreditCardExpiryDate())
+            print("Credit Card Number: " + str(self.getCreditCardNumber()))
+            print("Payment Method: " + self.__paymentMethod.value)
+
+
+# This class summarizes for the final booking details
+class Summary:
+    def __init__(self, billingName, finalPrice, howManyRooms, creditCardInformation, nights, taxes=0.05):
+        self.__billingName = billingName
+        self.__finalPrice = finalPrice
+        self.__howManyRooms = howManyRooms
+        self.__creditCardInformation = creditCardInformation
+        self.__nights = nights
+        self.__taxes = taxes
+
+    # function for calculating taxes
+    def calculateTaxes(self, rate=0.05):
+        self.__taxes = self.__finalPrice * rate
+        return self.__taxes
+
+    # this function is to calculate the final price for our tax
+    def calculateFinalPriceWithTax(self):
+        tax_amount = self.calculateTaxes()
+        final_price_with_tax = self.__finalPrice + tax_amount
+        return final_price_with_tax
+
+    # The method i am using to print summary details
+    def print_summary_details(self):
+        print("\nSummary Details:")  # \n is for creating a new line when printing.
+        print("Billing Name: " + self.__billingName)
+        print("Final Price (Before Tax): " + str(self.__finalPrice))
+        print("Number of Rooms: " + str(self.__howManyRooms))
+        print("Credit Card Information: " + self.__creditCardInformation)
+        print("Nights: " + str(self.__nights))
+        print("Taxes: " + str(self.__taxes))
+        print("Final Price with Tax: " + str(self.calculateFinalPriceWithTax()))
+
+
+# First object with all the classes and with their parameters
+user1 = User("Ted", "Vera", "tedvera@gmail.com", "7841988203", 5012345678, "TedVera@", "Ted_Vera")
+room1 = Room("Large", "2010-08-22", "2010-08-24", 500, RoomAvailability.available)
+payment1 = Payment("Ted", "Vera", "2023-01-01", "2025-01-01", 1234567812345678, PaymentMethod.at_hotel)
+summary1 = Summary("Ted Vera", 1000, 1, "Visa", 2)
+# this will print our classes because i have already assigned the print function within the class itself
+user1.print_user_details()
+room1.print_room_details()
+payment1.print_payment_details()
+summary1.print_summary_details()
+# to show the final price with the taxes which is 5%
+final_price_with_tax = summary1.calculateFinalPriceWithTax()
+print("Final Price with Tax: ", final_price_with_tax)
+print()
+# Second object with all the classes and with their parameters
+user2 = User("Mansour", "Alhouti", "mansour.alhouti@gmail.com", "7842004169", 503922843, "Mansour123@",
+             "Mansour_Alhouti")
+room2 = Room("Medium", "2024-10-01", "2024-10-05", 400, RoomAvailability.available)
+payment2 = Payment("Mansour", "Alhouti", "2024-01-01", "2026-01-01", 9876543210987654, PaymentMethod.at_hotel)
+summary2 = Summary("Mansour Alhouti", 1600, 1, "Visa", 4)
+
+user2.print_user_details()
+room2.print_room_details()
+payment2.print_payment_details()
+summary2.print_summary_details()
+
+final_price_with_tax = summary2.calculateFinalPriceWithTax()
+print("Final Price with Tax: ", final_price_with_tax)
+print()
+# Third object with all the classes and with their parameters
+user3 = User("John", "Cena", "john_cena@gmail.com", "784197823", 50122455678, "YouCantSeeMe@", "John_Cena")
+room3 = Room("Large", "2024-10-10", "2024-10-15", 1000, RoomAvailability.not_available)
+# Because the room isn't available it will just say this room isn't available instead of showing everything else
+user3.print_user_details()
+room3.print_room_details()
